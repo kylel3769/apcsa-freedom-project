@@ -8,7 +8,7 @@ jobs:
       - name: Install Pygbag
         run: pip install pygbag
       - name: Build Website
-        run: python3 -m pygbag --build $GITHUB_WORKSPACE/main.py
+        run: python3 -m pygbag --build $GITHUB_WORKSPACE/game/main.py
       - name: Deploy to Pages
         uses: JamesIves/github-pages-deploy-action@4.1.1
         with:
