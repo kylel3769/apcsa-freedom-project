@@ -1,0 +1,3 @@
+git add .
+git commit -m "added deployment workflow"
+git push origin main
