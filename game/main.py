@@ -7,7 +7,7 @@ async def main():
     screen = pygame.display.set_mode((800, 600))
 
     monitor_up = False
-    current_cam = 1
+    cam = 1
     running = True
 
     cam1_button = pygame.Rect(600, 400, 80, 40)
@@ -34,15 +34,15 @@ async def main():
         screen.fill((0, 0, 0))
 
         if monitor_up:
-            if current_cam == 1:
-                pygame.draw.rect(screen, (0, 100, 0), (50, 50, 700, 350))  # Dark Green Cam 1
+            if cam == 1:
+                pygame.draw.rect(screen, (0, 100, 0), (50, 50, 700, 350))
             else:
-                pygame.draw.rect(screen, (100, 0, 0), (50, 50, 700, 350))  # Dark Red Cam 2
+                pygame.draw.rect(screen, (100, 0, 0), (50, 50, 700, 350))
 
-            pygame.draw.rect(screen, (200, 200, 200), cam1_button)  # Cam 1 Button
-            pygame.draw.rect(screen, (200, 200, 200), cam2_button)  # Cam 2 Button
+            pygame.draw.rect(screen, (200, 200, 200), cam1_button)
+            pygame.draw.rect(screen, (200, 200, 200), cam2_button)
         else:
-            pygame.draw.circle(screen, (100, 100, 100), (400, 300), 80)  # The Desk
+            pygame.draw.circle(screen, (100, 100, 100), (400, 300), 80)
 
         pygame.draw.rect(screen, (50, 50, 255), toggle_button)
 
