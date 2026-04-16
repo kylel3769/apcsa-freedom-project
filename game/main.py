@@ -27,9 +27,9 @@ async def main():
 
                 if monitor_up:
                     if cam1_button.collidepoint(mouse_pos):
-                        current_cam = 1
+                        cam = 1
                     if cam2_button.collidepoint(mouse_pos):
-                        current_cam = 2
+                        cam = 2
 
         screen.fill((0, 0, 0))
 
