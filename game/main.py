@@ -3,10 +3,15 @@ import random
 import asyncio 
 
 async def main():  
+    game_over = False
     pygame.init()
     pygame.mixer.init()
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.SysFont("Arial", 18)
+    ef = pygame.font.SysFont("Arial", 72, bold=True)
+
+    sepe = pygame.image.load("cam0evil.png").convert()
+    sepe = pygame.transform.scale(sepe, (800, 600))
     
     closed = pygame.image.load("pc.png").convert_alpha()
     closed = pygame.transform.scale(closed, (200, 200)) 
@@ -68,17 +73,18 @@ async def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-                
-            if event.type == move:
-                if random.randint(1, 2) == 1: 
-                    if enemy_location == "1": enemy_location = random.choice(["2", "4"])
-                    elif enemy_location == "2": enemy_location = random.choice(["1", "5"])
-                    elif enemy_location == "4": enemy_location = random.choice(["1", "3"])
-                    elif enemy_location == "5": enemy_location = random.choice(["2", "3"])
-                    elif enemy_location == "3":
-                        enemy_location = random.choice(["Office", "4", "5"])
-                            if enemy_location = "Office"
-                                pygame.time.wait(5000) 
+
+            if not game_over: 
+                if event.type == move:
+                    if random.randint(1, 2) == 1: 
+                        if enemy_location == "1": enemy_location = random.choice(["2", "4"])
+                        elif enemy_location == "2": enemy_location = random.choice(["1", "5"])
+                        elif enemy_location == "4": enemy_location = random.choice(["1", "3"])
+                        elif enemy_location == "5": enemy_location = random.choice(["2", "3"])
+                        elif enemy_location == "3":
+                            enemy_location = random.choice(["Office", "4", "5"])
+                                if enemy_location = "Office"
+                                    game_over = True 
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print(f'({mc[0]}, {mc[1]}, 60, 30)}}')
@@ -135,7 +141,11 @@ async def main():
                 label = font.render(cam_id, True, (0, 0, 0))
                 screen.blit(label, (data["rect"].x + 18, data["rect"].y + 5))
 
-
+        if game_over:
+            screen.blit(home_evil, (0, 0))
+            et = ef.render("GAME OVER", True, (200, 0, 0))
+            cr = et.get_rect(center=(400, 300))
+            screen.blit(et, cr)
         else:
             screen.blit(closed, (600, 50))
 
