@@ -142,7 +142,7 @@ async def main():
                 screen.blit(label, (data["rect"].x + 18, data["rect"].y + 5))
 
         if game_over:
-            screen.blit(home_evil, (0, 0))
+            screen.blit(sepe, (0, 0))
             et = ef.render("GAME OVER", True, (200, 0, 0))
             cr = et.get_rect(center=(400, 300))
             screen.blit(et, cr)
