@@ -83,8 +83,8 @@ async def main():
                         elif enemy_location == "5": enemy_location = random.choice(["2", "3"])
                         elif enemy_location == "3":
                             enemy_location = random.choice(["Office", "4", "5"])
-                                if enemy_location = "Office"
-                                    game_over = True 
+                            if enemy_location = "Office"
+                                game_over = True 
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print(f'({mc[0]}, {mc[1]}, 60, 30)}}')
