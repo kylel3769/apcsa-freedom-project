@@ -1,5 +1,7 @@
 this is for trinket.io
 
+https://trinket.io/pygame/2a9f6e25bde3
+
 ```
 import pygame
 import random
