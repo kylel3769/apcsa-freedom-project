@@ -69,7 +69,7 @@ async def main():
             if event.type == pygame.QUIT:
                 running = False
                 
-            if event.type == move_event:
+            if event.type == move:
                 if random.randint(1, 2) == 1: 
                     if enemy_location == "1": enemy_location = random.choice(["2", "4"])
                     elif enemy_location == "2": enemy_location = random.choice(["1", "5"])
