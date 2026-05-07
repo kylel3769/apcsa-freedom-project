@@ -3,14 +3,23 @@ this is for trinket.io
 ```
 import pygame
 import random
-
 # import asyncio 
 
 def main():  
+    game_over = False
     pygame.init()
     pygame.mixer.init()
     screen = pygame.display.set_mode((800, 600))
     font = pygame.font.SysFont("Arial", 18)
+    ef = pygame.font.SysFont("Arial", 72, bold=True)
+
+    clock = pygame.time.Clock()
+    
+    map = pygame.image.load("map.png").convert()
+    map = pygame.transform.scale(map, (300, 230))
+
+    sepe = pygame.image.load("cam0evil.png").convert()
+    sepe = pygame.transform.scale(sepe, (800, 600))
     
     closed = pygame.image.load("pc.png").convert_alpha()
     closed = pygame.transform.scale(closed, (200, 200)) 
@@ -29,7 +38,7 @@ def main():
     current_cam = "1"
     running = True
 
-    map_container = pygame.Rect(425, 250, 300, 230)
+    # map_container = pygame.Rect(425, 250, 300, 230)
 
     cameras = {
         "1": {
@@ -72,15 +81,18 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
-                
-            if event.type == move_event:
-                if random.randint(1, 2) == 1: 
-                    if enemy_location == "1": enemy_location = random.choice(["2", "4"])
-                    elif enemy_location == "2": enemy_location = random.choice(["1", "5"])
-                    elif enemy_location == "4": enemy_location = random.choice(["1", "3"])
-                    elif enemy_location == "5": enemy_location = random.choice(["2", "3"])
-                    elif enemy_location == "3":
-                        enemy_location = random.choice(["Office", "4", "5"])
+
+            if not game_over: 
+                if event.type == move:
+                    if random.randint(1, 2) == 1: 
+                        if enemy_location == "1": enemy_location = random.choice(["2", "4"])
+                        elif enemy_location == "2": enemy_location = random.choice(["1", "5"])
+                        elif enemy_location == "4": enemy_location = random.choice(["1", "3"])
+                        elif enemy_location == "5": enemy_location = random.choice(["2", "3"])
+                        elif enemy_location == "3":
+                            enemy_location = random.choice(["Office", "4", "5"])
+                            if enemy_location == "Office":
+                                game_over = True 
 
             if event.type == pygame.MOUSEBUTTONDOWN:
                 print(f'({mc[0]}, {mc[1]}, 60, 30)}}')
@@ -108,21 +120,22 @@ def main():
             pygame.draw.rect(screen, (30, 40, 40), (50, 50, 700, 450), 5)   
             screen.blit(open, (600, 50))
             
-            pygame.draw.rect(screen, (30, 30, 30), map_container)
-            pygame.draw.rect(screen, (200, 200, 200), map_container, 2)
+            # pygame.draw.rect(screen, (30, 30, 30), map_container)
+            # pygame.draw.rect(screen, (200, 200, 200), map_container, 2)
             
-            line_color = (100, 100, 100)
-            pygame.draw.line(screen, line_color, (485, 275), (665, 275), 3)
-            pygame.draw.line(screen, line_color, (440, 290), (440, 440), 3)
-            pygame.draw.line(screen, line_color, (675, 290), (675, 440), 3)
-            pygame.draw.line(screen, line_color, (655, 450), (665, 450), 3)
-            pygame.draw.line(screen, line_color, (655, 345), (655, 450), 3)
-            pygame.draw.line(screen, line_color, (590, 345), (655, 345), 3)
-            pygame.draw.line(screen, line_color, (590, 345), (590, 360), 3)
-            pygame.draw.line(screen, line_color, (475, 370), (550, 370), 3)
-            pygame.draw.line(screen, line_color, (475, 370), (475, 440), 3)
-            pygame.draw.line(screen, line_color, (530, 380), (550, 380), 3)
-            pygame.draw.line(screen, line_color, (530, 380), (530, 400), 3)
+            # line_color = (100, 100, 100)
+            # pygame.draw.line(screen, line_color, (485, 275), (665, 275), 3)
+            # pygame.draw.line(screen, line_color, (440, 290), (440, 440), 3)
+            # pygame.draw.line(screen, line_color, (675, 290), (675, 440), 3)
+            # pygame.draw.line(screen, line_color, (655, 450), (665, 450), 3)
+            # pygame.draw.line(screen, line_color, (655, 345), (655, 450), 3)
+            # pygame.draw.line(screen, line_color, (590, 345), (655, 345), 3)
+            # pygame.draw.line(screen, line_color, (590, 345), (590, 360), 3)
+            # pygame.draw.line(screen, line_color, (475, 370), (550, 370), 3)
+            # pygame.draw.line(screen, line_color, (475, 370), (475, 440), 3)
+            # pygame.draw.line(screen, line_color, (530, 380), (550, 380), 3)
+            # pygame.draw.line(screen, line_color, (530, 380), (530, 400), 3)
+            screen.blit(map, (425, 250))
             
             sep_rm = pygame.Rect(500, 400, 150, 70)
             pygame.draw.rect(screen, (150, 150, 150), sep_rm)
@@ -137,15 +150,20 @@ def main():
                 label = font.render(cam_id, True, (0, 0, 0))
                 screen.blit(label, (data["rect"].x + 18, data["rect"].y + 5))
 
-
+        if game_over:
+            screen.blit(sepe, (0, 0))
+            et = ef.render("GAME OVER", True, (200, 0, 0))
+            cr = et.get_rect(center=(400, 300))
+            screen.blit(et, cr)
         else:
             screen.blit(closed, (600, 50))
 
 
         pygame.display.flip()
+        clock.tick(30)
+        # await asyncio.sleep(0)
 
     pygame.quit()
 
 main()
-
 ```
