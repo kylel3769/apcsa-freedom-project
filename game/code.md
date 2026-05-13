@@ -1,6 +1,6 @@
 this is for trinket.io
 
-https://trinket.io/pygame/2a9f6e25bde3
+https://trinket.io/pygame/74c0f784097a
 
 ```
 import pygame
